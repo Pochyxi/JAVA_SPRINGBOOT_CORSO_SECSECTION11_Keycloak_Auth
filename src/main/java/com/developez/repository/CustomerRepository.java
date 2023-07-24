@@ -10,6 +10,6 @@ import java.util.List;
 public interface CustomerRepository extends CrudRepository<Customer, Integer> {
 
     // Trova un cliente in base all'email.
-    List<Customer> findByEmail(String email);
+    Customer findByEmail(String email);
 
 }

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-//  bin/kc.sh start-dev --http-port 8180
+// bin/kc.sh start-dev --http-port 8180
 // bin/kc.sh start-dev --http-port 8180 --spi-theme-static-max-age=-1 --spi-theme-cache-themes=false
 // bin/kc.bat start-dev --http-port 8180 --spi-theme-static-max-age=-1 --spi-theme-cache-themes=false
 public class KeycloakRoleConverter implements Converter<Jwt, Collection<GrantedAuthority>> {

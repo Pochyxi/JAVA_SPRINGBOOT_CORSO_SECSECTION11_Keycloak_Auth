@@ -24,17 +24,17 @@ public class CardsController {
         this.customerRepository = customerRepository;
     }
 
-    @GetMapping("/myCards")
-    public List<Cards> getCardDetails(@RequestParam String email) {
-        List<Customer> customers = customerRepository.findByEmail(email);
-        if (customers != null && !customers.isEmpty()) {
-            List<Cards> cards = cardsRepository.findByCustomerId(customers.get(0).getId());
-            if (cards != null ) {
-                return cards;
-            }
-        }
-        return null;
-    }
+//    @GetMapping("/myCards")
+//    public List<Cards> getCardDetails(@RequestParam String email) {
+//        List<Customer> customers = customerRepository.findByEmail(email);
+//        if (customers != null && !customers.isEmpty()) {
+//            List<Cards> cards = cardsRepository.findByCustomerId(customers.get(0).getId());
+//            if (cards != null ) {
+//                return cards;
+//            }
+//        }
+//        return null;
+//    }
 
 
 }

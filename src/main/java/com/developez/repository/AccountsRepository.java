@@ -10,6 +10,5 @@ import java.util.List;
 public interface AccountsRepository extends CrudRepository<Accounts, Long> {
 
     // Metodo per trovare un oggetto "Accounts" in base all'ID del cliente.
-    List<Accounts> findByCustomerId( int customerId);
-
+    List<Accounts> findAccountsByAccountEmail(String email);
 }

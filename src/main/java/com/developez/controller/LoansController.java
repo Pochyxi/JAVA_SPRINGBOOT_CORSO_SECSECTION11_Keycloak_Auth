@@ -25,17 +25,17 @@ public class LoansController {
         this.customerRepository = customerRepository;
     }
 
-    @GetMapping("/myLoans")
-    @PreAuthorize( "hasAnyRole('ADMIN', 'USER')" )
-    public List<Loans> getLoanDetails(@RequestParam String email) {
-        List<Customer> customers = customerRepository.findByEmail(email);
-        if (customers != null && !customers.isEmpty()) {
-            List<Loans> loans = loanRepository.findByCustomerIdOrderByStartDtDesc(customers.get(0).getId());
-            if (loans != null ) {
-                return loans;
-            }
-        }
-        return null;
-    }
+//    @GetMapping("/myLoans")
+//    @PreAuthorize( "hasAnyRole('ADMIN', 'USER')" )
+//    public List<Loans> getLoanDetails(@RequestParam String email) {
+//        List<Customer> customers = customerRepository.findByEmail(email);
+//        if (customers != null && !customers.isEmpty()) {
+//            List<Loans> loans = loanRepository.findByCustomerIdOrderByStartDtDesc(customers.get(0).getId());
+//            if (loans != null ) {
+//                return loans;
+//            }
+//        }
+//        return null;
+//    }
 
 }

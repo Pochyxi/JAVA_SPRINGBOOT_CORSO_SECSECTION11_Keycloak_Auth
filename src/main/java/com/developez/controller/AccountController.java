@@ -39,33 +39,23 @@ public class AccountController {
     public ResponseEntity<?> getAccountDetails(@RequestParam String email) {
         String clientEmail = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        List<Customer> customers = customerRepository.findByEmail(email);
+        List<Accounts> accounts = accountsRepository.findAccountsByAccountEmail(email);
 
-        if (customers.isEmpty()) {
-            return new ResponseEntity<>("Customer not found", HttpStatus.NOT_FOUND);
+        if (accounts.isEmpty()) {
+            return new ResponseEntity<>("Accounts not found", HttpStatus.NOT_FOUND);
         }
 
-        Customer customer = customers.get(0);
 
-//        if ( !Objects.equals( customer.getEmail(), clientEmail ) ) {
-//            return new ResponseEntity<>("Client ID does not match authenticated user", HttpStatus.UNAUTHORIZED);
-//        }
-
-        List<Accounts> accountsList = accountsRepository.findByCustomerId( customer.getId());
-
-        if ( accountsList.size() == 0) {
-            return new ResponseEntity<>("Account not found", HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<>(accountsList, HttpStatus.OK);
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 
     @PostMapping ("/newAccount")
     @PreAuthorize( "hasRole('ADMIN')" )
     public ResponseEntity<?> saveAccountDetails( @RequestBody Accounts accounts ) {
-        customerRepository.findById( accounts.getCustomerId() ).orElseThrow(
-                () -> new ResponseStatusException( HttpStatus.NOT_FOUND, "Customer not found" )
-        );
+
+//        customerRepository.findById( accounts.getCustomerId() ).orElseThrow(
+//                () -> new ResponseStatusException( HttpStatus.NOT_FOUND, "Customer not found" )
+//        );
 
         accounts.setCreateDt( LocalDate.now()  );
 

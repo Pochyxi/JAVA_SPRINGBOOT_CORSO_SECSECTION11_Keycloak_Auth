@@ -1,6 +1,7 @@
 package com.developez.controller;
 
 import com.developez.model.AccountTransactions;
+import com.developez.model.Accounts;
 import com.developez.model.Customer;
 import com.developez.repository.AccountTransactionsRepository;
 import com.developez.repository.CustomerRepository;
@@ -24,17 +25,18 @@ public class BalanceController {
         this.customerRepository = customerRepository;
     }
 
-    @GetMapping("/myBalance")
-    public List<AccountTransactions> getBalanceDetails(@RequestParam String email) {
-        List<Customer> customers = customerRepository.findByEmail(email);
-        if (customers != null && !customers.isEmpty()) {
-            List<AccountTransactions> accountTransactions = accountTransactionsRepository.
-                    findByCustomerIdOrderByTransactionDtDesc(customers.get(0).getId());
-            if (accountTransactions != null ) {
-                return accountTransactions;
-            }
-        }
-        return null;
-    }
+//    @GetMapping("/myBalance")
+//    public List<AccountTransactions> getBalanceDetails(@RequestParam String email) {
+//        List<Accounts> accounts = accountTransactionsRepository.(email);
+//
+//        if (customers != null && !customers.isEmpty()) {
+//            List<AccountTransactions> accountTransactions = accountTransactionsRepository.
+//                    findByCustomerIdOrderByTransactionDtDesc(customers.get(0).getId());
+//            if (accountTransactions != null ) {
+//                return accountTransactions;
+//            }
+//        }
+//        return null;
+//    }
 
 }

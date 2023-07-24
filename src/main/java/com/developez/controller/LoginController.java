@@ -33,18 +33,18 @@ public class LoginController {
 
 
 
-    @RequestMapping("/user")
-    public Customer getUserDetailsAfterLogin( Authentication authentication ) {
-        // Recupera l'utente autenticato in base all'email
-        List<Customer> customers = customerRepository.findByEmail(authentication.getName());
-
-        // Verifica se sono presenti utenti
-        if (customers.size() > 0) {
-            // Restituisci il primo utente trovato
-            return customers.get(0);
-        } else {
-            // Se non sono presenti utenti, restituisci null
-            return null;
-        }
-    }
+//    @RequestMapping("/user")
+//    public Customer getUserDetailsAfterLogin( Authentication authentication ) {
+//        // Recupera l'utente autenticato in base all'email
+//        List<Customer> customers = customerRepository.findByEmail(authentication.getName());
+//
+//        // Verifica se sono presenti utenti
+//        if (customers.size() > 0) {
+//            // Restituisci il primo utente trovato
+//            return customers.get(0);
+//        } else {
+//            // Se non sono presenti utenti, restituisci null
+//            return null;
+//        }
+//    }
 }
