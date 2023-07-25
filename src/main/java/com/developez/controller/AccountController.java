@@ -10,13 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 public class AccountController {
@@ -37,7 +35,7 @@ public class AccountController {
     @GetMapping("/myAccount")
     @PreAuthorize( "hasAnyRole('ADMIN', 'USER')" )
     public ResponseEntity<?> getAccountDetails(@RequestParam String email) {
-        String clientEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+//        String clientEmail = SecurityContextHolder.getContext().getAuthentication().getName();
 
         List<Accounts> accounts = accountsRepository.findAccountsByAccountEmail(email);
 
@@ -50,7 +48,6 @@ public class AccountController {
     }
 
     @PostMapping ("/newAccount")
-    @PreAuthorize( "hasRole('ADMIN')" )
     public ResponseEntity<?> saveAccountDetails( @RequestBody Accounts accounts ) {
 
 //        customerRepository.findById( accounts.getCustomerId() ).orElseThrow(

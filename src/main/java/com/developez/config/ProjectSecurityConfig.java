@@ -55,12 +55,13 @@ public class ProjectSecurityConfig {
                             // Consente le richieste da "http://localhost:4200"
                             corsConfiguration.setAllowedOrigins( List.of( "http://localhost:5173" ) );
                             // Consente tutti i metodi HTTP
-                            corsConfiguration.setAllowedMethods( List.of( "*" ) );
+                            corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "HEAD",
+                                    "OPTIONS"));
                             // Consente tutti gli header
                             corsConfiguration.setAllowedHeaders( List.of( "*" ) );
                             // Consente le credenziali
                             corsConfiguration.setAllowCredentials( true );
-                            corsConfiguration.setExposedHeaders( Arrays.asList( "Authorization" ) );
+                            corsConfiguration.setExposedHeaders( Arrays.asList( "Authorization", "X-XSRF-TOKEN" ) );
                             // Imposta l'età massima del risultato preflight (in secondi) a 3600
                             corsConfiguration.setMaxAge( 3600L );
                             return corsConfiguration;
@@ -83,6 +84,7 @@ public class ProjectSecurityConfig {
                 .authorizeHttpRequests( ( requests ) -> requests
 
                         .requestMatchers("/myAccount").hasRole("USER")
+                        .requestMatchers( "/newAccount" ).hasRole( "ADMIN" )
                         .requestMatchers( "/makeAdmin" ).hasRole( "ADMIN" )
                         .requestMatchers("/myBalance").hasAnyRole( "USER", "ADMIN" )
                         .requestMatchers("/myLoans").authenticated()
