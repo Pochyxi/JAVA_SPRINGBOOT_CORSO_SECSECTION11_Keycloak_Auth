@@ -20,17 +20,6 @@ import java.util.List;
 @Configuration
 public class ProjectSecurityConfig {
 
-    /*
-     * Il metodo defaultSecurityFilterChain è annotato con @Bean e restituisce un oggetto SecurityFilterChain.
-     * Questo metodo configura le regole di autorizzazione per le richieste HTTP.
-     * In particolare, specifica che le richieste agli endpoint ("/myAccount", "myLoans", "myBalance", "myCards") devono
-     * essere autenticate, mentre le richieste agli endpoint ("notices", "contact") devono essere accessibili a tutti
-     * senza autenticazione. Viene utilizzato il metodo http.authorizeHttpRequests() per definire queste regole.
-     *
-     * Il metodo defaultSecurityFilterChain configura anche la gestione del login tramite form (http.formLogin()) e
-     * la gestione delle richieste HTTP di base (http.httpBasic()).
-     * Infine, viene restituito l'oggetto http costruito tramite il metodo build().
-     */
     @Bean
     SecurityFilterChain defaultSecurityFilterChain( HttpSecurity http ) throws Exception {
         // Crea un nuovo gestore di attributi di richiesta CSRF
@@ -85,13 +74,9 @@ public class ProjectSecurityConfig {
 
                         .requestMatchers("/myAccount").hasRole("USER")
                         .requestMatchers( "/newAccount" ).hasRole( "ADMIN" )
-                        .requestMatchers( "/makeAdmin" ).hasRole( "ADMIN" )
-                        .requestMatchers("/myBalance").hasAnyRole( "USER", "ADMIN" )
-                        .requestMatchers("/myLoans").authenticated()
-                        .requestMatchers("/myCards").hasRole("USER")
+                        .requestMatchers( "/updateAccount" ).hasRole( "ADMIN" )
 
                         .requestMatchers("/user").authenticated()
-                        .requestMatchers("/notices","/contact","/register").permitAll()
                 )
                 // Configura la gestione del login tramite form oauth2
                 .oauth2ResourceServer( ( oauth2RS ) -> oauth2RS

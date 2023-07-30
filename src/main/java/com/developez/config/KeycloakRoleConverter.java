@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class KeycloakRoleConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
 
     @Override
+    @SuppressWarnings( "unchecked" )
     public Collection<GrantedAuthority> convert( Jwt jwt ) {
         Map<String, Object> realmAccess = ( Map<String, Object> ) jwt.getClaims().get( "realm_access" );
 
@@ -24,12 +25,10 @@ public class KeycloakRoleConverter implements Converter<Jwt, Collection<GrantedA
             return new ArrayList<>();
         }
 
-        Collection<GrantedAuthority> returnValue = (( List<String> ) realmAccess.get( "roles" ))
+        return (( List<String> ) realmAccess.get( "roles" ))
                 .stream().map( roleName -> "ROLE_" + roleName )
                 .map( SimpleGrantedAuthority::new )
                 .collect( Collectors.toList() );
-
-        return returnValue;
     }
 
 }

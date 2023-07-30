@@ -5,10 +5,11 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface AccountsRepository extends CrudRepository<Accounts, Long> {
 
     // Metodo per trovare un oggetto "Accounts" in base all'ID del cliente.
-    List<Accounts> findAccountsByAccountEmail(String email);
+    Optional<Accounts> findAccountsByAccountEmail( String email);
 }

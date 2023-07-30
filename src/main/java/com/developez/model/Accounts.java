@@ -1,10 +1,7 @@
 package com.developez.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -13,6 +10,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @ToString
+@Builder
+@AllArgsConstructor
 public class Accounts {
 
     @Id
